@@ -1,3 +1,5 @@
+### FIAMMA v1.0
+
 ## Overview
 
 FIAMMA v1.0 is a specialized MATLAB-based computational tool designed to model and analyze the dynamics of jet diffusion flames through the computation of Flame Transfer Functions (FTFs). Developed by Pietro Giraudi at Imperial College London in 2023, this tool represents a significant advancement in the field of combustion dynamics, offering researchers and engineers a robust platform to study flame stability under various operational conditions.
