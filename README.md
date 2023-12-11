@@ -1,4 +1,4 @@
-### FIAMMA v1.0
+## FIAMMA v1.0
 
 ## Overview
 
