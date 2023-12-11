@@ -1,0 +1,43 @@
+function dYdt = SteadyFun(t,Y)
+global FLAMESTRUCTURE MESH PROBLEMDATA
+
+xx = MESH.xx/PROBLEMDATA.L_ref;
+zz = MESH.zz/PROBLEMDATA.L_ref;
+
+%Generating boundary condition
+Y_BC = steadyBC();
+
+%Reconstructing the variable
+[Nz,Nx] = size(MESH.xx);
+F0 = Y;
+F0 = reshape(F0,Nz-1,Nx);
+
+%Reconstructing the BC
+V_BC = Y_
+F_BC = Y_BC;
+
+%Inlet boundary condition
+F = [F_BC; F0];
+
+rho = my_rho(F)/PROBLEMDATA.rho_ref;
+%drho = my_drho(F);
+D = my_D(F)/PROBLEMDATA.D_ref;
+%mu = my_mu(F);
+%Pe = PROBLEMDATA.Pe;
+%Re = PROBLEMDATA.Re;
+%Ampl = PROBLEMDATA.Amplitude;
+%Freq = PROBLEMDATA.Frequency;
+rr = xx;
+rr(:,1) = 1;
+
+%Momentum equation
+dVdt = -V.*dz(V,zz) + 1./PROBLEMDATA.Re.*mu./rho.*(d2x(V,xx)+1./rr.*dx(V,xx)+4./3.*d2z(V,zz));
+
+%Mixture fraction equation
+dFdt = - (V.*dz(F,zz)) + 1./PROBLEMDATA.Pe .* ( D.*d2x(F,xx) + 1./(rho).*dx(F,xx).*dx(rho.*D,xx) + D./rr.*dx(F,xx) + D.*d2z(F,zz) + 1./rho.*dz(F,zz).*dz(rho.*D,zz));
+
+dVdt = reshape(dVdt(2:Nz,1:Nx),[],1);
+dFdt = reshape(dFdt(2:Nz,1:Nx),[],1);
+
+dYdt = [dVdt;dFdt];
+end
